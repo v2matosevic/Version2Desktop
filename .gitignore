@@ -1,0 +1,10 @@
+**/target/
+**/dist/
+**/__pycache__/
+**/*.exe
+**/*.dll
+**/*.pdb
+apps/vesper/vendor/runtime/
+
+# Generated long-path stress fixture, not required by unit tests.
+apps/vesper/fixtures/long/

@@ -1,0 +1,30 @@
+name: Windows build and tests
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [sonora, luma, vesper]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Rust toolchain
+        run: rustup toolchain install 1.94.0 --profile minimal --component rustfmt --component clippy
+      - name: Decoder
+        if: matrix.app == 'vesper'
+        run: |
+          python scripts/fetch-decoder.py --out apps/vesper/vendor/runtime
+          "VESPER_TEST_DLL=$pwd/apps/vesper/vendor/runtime/libmpv-2.dll" >> $env:GITHUB_ENV
+      - name: Checks and release
+        working-directory: apps/${{ matrix.app }}
+        run: |
+          cargo +1.94.0 fmt -- --check
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cargo +1.94.0 clippy --locked --release --all-targets --no-deps -- -D warnings
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cargo +1.94.0 test --locked --release --all-targets
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cargo +1.94.0 build --locked --release

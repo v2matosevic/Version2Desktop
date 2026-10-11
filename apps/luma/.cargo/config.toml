@@ -1,0 +1,10 @@
+[build]
+jobs = 2
+
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]
+
+[env]
+LIB_AOM_DECODE_WIDTH_LIMIT = "8192"
+LIB_AOM_DECODE_HEIGHT_LIMIT = "8192"
+CMAKE_TOOLCHAIN_FILE = { value = "scripts/aom-toolchain.cmake", relative = true }

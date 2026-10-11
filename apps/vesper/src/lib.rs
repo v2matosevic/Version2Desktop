@@ -1,0 +1,16 @@
+pub mod controller;
+#[cfg(feature = "desktop")]
+pub mod input;
+pub mod media;
+#[cfg(feature = "desktop")]
+pub mod menu;
+pub mod mpv;
+pub mod openq;
+pub mod prefetch;
+#[cfg(feature = "desktop")]
+pub mod search_ui;
+pub mod settings;
+pub mod smoke;
+pub mod subsearch;
+pub mod subtext;
+pub mod timing;

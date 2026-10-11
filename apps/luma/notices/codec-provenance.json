@@ -1,0 +1,20 @@
+[
+  {
+    "package": "avif-decode-1.0.2",
+    "bytes": 8646,
+    "sha256": "37c6db6ccb30227ea05e601a546b34528132a6d493abf576d356c6f8c7351a24",
+    "registry": "https://crates.io"
+  },
+  {
+    "package": "libaom-sys-0.17.2+libaom.3.11.0",
+    "bytes": 3953263,
+    "sha256": "7c4fce8aaf0c2d8534529b0698ed98ec1da8d35319588d20b0d79ce6446e4194",
+    "registry": "https://crates.io"
+  },
+  {
+    "package": "jpeg-decoder-0.3.2",
+    "bytes": 745371,
+    "sha256": "00810f1d8b74be64b13dbf3db89ac67740615d6c891f0e7b6179326533011a07",
+    "registry": "https://crates.io"
+  }
+]

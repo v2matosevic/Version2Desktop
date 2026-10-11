@@ -1,0 +1,10 @@
+The published crate declares BSD-2-Clause and omits a full license file. Canonical SPDX BSD-2-Clause text is included without inventing copyright dates. Exact published metadata:
+{
+  "name": "aom-decode",
+  "version": "0.2.14",
+  "authors": [
+    "Kornel Lesi\u0144ski <kornel@geekhood.net>"
+  ],
+  "license": "BSD-2-Clause",
+  "repository": "https://gitlab.com/kornelski/aom-decode"
+}

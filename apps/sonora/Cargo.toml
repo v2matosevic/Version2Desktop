@@ -1,0 +1,44 @@
+[package]
+name = "sonora"
+version = "0.2.1"
+edition = "2021"
+rust-version = "1.94"
+license-file = "LICENSE"
+description = "Sonora: offline local music, by Version2"
+
+[dependencies]
+eframe = { version = "=0.35.0", default-features = false, features = ["glow", "accesskit"] }
+v2-ui = { path = "../../shared/v2-ui" }
+rodio = { version = "=0.21.1", default-features = false, features = ["playback"] }
+rubato = { version = "=5.0.1", default-features = false, features = ["fft_resampler"] }
+symphonia = { version = "=0.5.5", default-features = false, features = ["aac", "aiff", "alac", "flac", "isomp4", "mp3", "ogg", "pcm", "vorbis", "wav"] }
+symphonia-adapter-libopus = "=0.2.9"
+image = { version = "=0.25.9", default-features = false, features = ["jpeg", "png", "webp"] }
+rfd = { version = "=0.15.4", default-features = false }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+rand = "0.9"
+
+[target.'cfg(windows)'.dependencies]
+# System Media Transport Controls (media keys, volume flyout, lock screen) for Sonora's own window.
+# The same windows 0.62.2 the accessibility layer already compiles; only extra namespaces are added.
+windows = { version = "=0.62.2", features = ["Foundation", "Media", "Storage_Streams", "Win32_Foundation", "Win32_System_ProcessStatus", "Win32_System_Threading", "Win32_System_WinRT", "Win32_UI_WindowsAndMessaging"] }
+raw-window-handle = "=0.6.2"
+
+[dev-dependencies]
+egui_kittest = { version = "=0.35.0", features = ["snapshot", "wgpu"] }
+
+[build-dependencies]
+winresource = "0.1"
+
+# Offline DSP and decoder tests run seconds of audio; an unoptimised build is minutes slower.
+[profile.test]
+opt-level = 2
+debug = false
+
+[profile.release]
+opt-level = "s"
+lto = "thin"
+codegen-units = 1
+strip = true
+

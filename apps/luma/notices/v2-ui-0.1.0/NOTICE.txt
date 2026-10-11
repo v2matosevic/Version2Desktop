@@ -1,0 +1,1 @@
+Version2 first-party shared native UI, version 0.1.0. Copyright (c) 2026 Version2. No public distribution license has been selected. System fonts are loaded at runtime and are not redistributed. Third-party egui/eframe licenses are separately included.

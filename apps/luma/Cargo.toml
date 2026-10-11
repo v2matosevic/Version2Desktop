@@ -1,0 +1,51 @@
+[package]
+name = "luma"
+version = "0.2.1"
+edition = "2024"
+license-file = "LICENSE"
+rust-version = "1.94"
+publish = false
+description = "Offline native photo viewer"
+
+[dependencies]
+eframe = { version = "=0.35.0", default-features = false, features = ["glow", "accesskit"] }
+image = { version = "=0.25.10", default-features = false, features = ["jpeg", "png", "webp", "gif", "bmp", "tiff"] }
+rfd = { version = "=0.16.0", default-features = false }
+moxcms = "=0.8.1"
+avif-decode = { path = "vendor/avif-decode", default-features = false }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+v2-ui = { path = "../../shared/v2-ui" }
+jpeg-decoder = { version = "=0.3.2", default-features = false }
+# The window handle that clipboard and "Open with" belong to; already in the tree through eframe.
+raw-window-handle = "=0.6.2"
+# Microsoft's own bindings, already in the dependency tree through AccessKit. Windows codecs,
+# the Explorer/Open-with shell calls and the clipboard are reached through these.
+windows = { version = "=0.62.2", default-features = false, features = [
+    "Win32_Foundation",
+    "Win32_Graphics_Imaging",
+    "Win32_System_Com",
+    "Win32_System_Com_StructuredStorage",
+    "Win32_System_DataExchange",
+    "Win32_System_Memory",
+    "Win32_System_Ole",
+    "Win32_System_ProcessStatus",
+    "Win32_System_Threading",
+    "Win32_UI_Shell",
+    "Win32_UI_Shell_Common",
+    "Win32_UI_WindowsAndMessaging",
+] }
+
+[build-dependencies]
+winresource = { version = "=0.1.31", default-features = false }
+
+[dev-dependencies]
+tempfile = "3.23"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = true
+
+[workspace]
