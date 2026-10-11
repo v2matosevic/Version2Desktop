@@ -10,7 +10,7 @@ jobs:
       matrix:
         app: [sonora, luma, vesper]
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Rust toolchain
         run: rustup toolchain install 1.94.0 --profile minimal --component rustfmt --component clippy
       - name: Decoder
@@ -21,7 +21,7 @@ jobs:
       - name: Checks and release
         working-directory: apps/${{ matrix.app }}
         run: |
-          cargo +1.94.0 fmt -- --check
+          cargo +1.94.0 fmt --package ${{ matrix.app }} -- --check
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           cargo +1.94.0 clippy --locked --release --all-targets --no-deps -- -D warnings
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

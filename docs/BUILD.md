@@ -6,7 +6,7 @@ SDK and CMake (Luma's embedded AVIF codec). Runtime users need none of these dev
 From each `apps/<app>` directory:
 
 ```powershell
-cargo fmt -- --check
+cargo fmt --package <app> -- --check
 cargo clippy --locked --release --all-targets --no-deps -- -D warnings
 cargo test --locked --release --all-targets
 cargo build --locked --release
@@ -39,3 +39,5 @@ Pass `--nsis C:/path/to/makensis.exe` when NSIS is elsewhere. For Vesper extract
 release decoder-source asset into `decoder-source` first. Preserve its source archives, build
 metadata and notices when redistributing. Packages include documentation and a file/hash manifest.
 Unsigned installers have no publisher certificate.
+
+Formatting checks target the first-party app package. Vendored upstream codec formatting is preserved.
